@@ -4,6 +4,7 @@ from mainapp.apps import MainappConfig
 
 app_name = MainappConfig.name
 
+# http://127.0.0.1:8000/mainapp/...
 urlpatterns = [
     path("", views.MainPageView.as_view()),
     path("news/", views.NewsPageView.as_view()),
