@@ -1,11 +1,11 @@
-from django.views.generic import TemplateView
+from django.views.generic import ListView, TemplateView
 
 
 class MainPageView(TemplateView):
     template_name = "mainapp/index.html"
 
 
-class NewsPageView(TemplateView):
+class NewsPageView(ListView):
     template_name = "mainapp/news.html"
 
 
