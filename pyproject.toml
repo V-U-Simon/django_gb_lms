@@ -14,6 +14,7 @@ black = "^22.12.0"
 autoflake = "^2.0.0"
 python-dotenv = "^0.21.0"
 djhtml = "^1.5.2"
+djlint = "^1.19.9"
 
 
 [build-system]
