@@ -1,6 +1,6 @@
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import DetailView, ListView, TemplateView
 
-from .models import News, Courses, Lesson, CourseTeachers
+from .models import Courses, CourseTeachers, Lesson, News
 
 
 class MainPageView(TemplateView):
@@ -32,13 +32,12 @@ class CoursePageDetailView(DetailView):
     template_name = "mainapp/Course_detail.html"
     model = Courses
     context_object_name = "course_object"
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["lessons"] = Lesson.objects.filter(course=context["course_object"])
         context["teachers"] = CourseTeachers.objects.filter(course=context["course_object"])
         return context
-    
 
 
 class ContactsPageView(TemplateView):
