@@ -1,11 +1,24 @@
 {% extends 'base.html' %}
 {% block title %}
-  Новости проекта
+  {{ news_object.title|default:"Новости" }}
 {% endblock title %}
 {% block content_class %}
-  container-md
+  container-m
 {% endblock content_class %}
 % endblock title %}
 {% block content %}
-  detail news
+  <div class="row justify-content-center pt-3">
+    <div class="col-md-12 col-lg-8">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title">{{ news_object.title }}</h5>
+          <p class="card-text">
+            {{ news_object.body }}
+          </p>
+          <a href="{% url 'mainapp:news' %}"
+            class="btn btn-primary">Назад</a>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock content %}
