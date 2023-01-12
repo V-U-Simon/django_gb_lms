@@ -17,6 +17,7 @@ class NewsPageView(TemplateView):
         context["news_preview"] = "Предварительное описание, которое заинтересует каждого"
         context["range"] = range(5)
         context["datetime_obj"] = datetime.now()
+        context["param_for_search_request"] = "some request"
         return context
 
 
