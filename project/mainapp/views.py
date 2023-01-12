@@ -1,6 +1,6 @@
-from django.views.generic import DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView
 
-from .models import News
+from .models import News, Courses, Lesson, CourseTeachers
 
 
 class MainPageView(TemplateView):
@@ -22,18 +22,23 @@ class NewsPageDetailView(DetailView):
     context_object_name = "news_object"
 
 
-class NewsWithPaginatorView(NewsPageView):
-    def get_context_data(self, page, **kwargs):
-        context = super().get_context_data(page=page, **kwargs)
-        context["page_num"] = page
-        context["page_total"] = 3
-        context["previous"] = page - 1 if page else None
-        context["next"] = page = page + 1 if page < context["page_total"] else None
-        return context
-
-
-class CoursesPageView(TemplateView):
+class CoursesPageView(ListView):
     template_name = "mainapp/courses_list.html"
+    model = Courses
+    context_object_name = "objects"
+
+
+class CoursePageDetailView(DetailView):
+    template_name = "mainapp/Course_detail.html"
+    model = Courses
+    context_object_name = "course_object"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["lessons"] = Lesson.objects.filter(course=context["course_object"])
+        context["teachers"] = CourseTeachers.objects.filter(course=context["course_object"])
+        return context
+    
 
 
 class ContactsPageView(TemplateView):
